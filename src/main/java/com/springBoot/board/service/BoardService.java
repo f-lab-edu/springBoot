@@ -11,20 +11,35 @@ import java.util.List;
 @RequiredArgsConstructor //생성자 주입
 public class BoardService {
     private final BoardRepository boardRepository;
+    private static long sequence = 0L;
 
-    public void save(BoardDTO boardDTO) {
-        boardRepository.save(boardDTO);
+    //목록
+    public List<BoardDTO> boardList() {
+        return boardRepository.boardList();
     }
 
-    public List<BoardDTO> findAll() {
-        return boardRepository.findAll();
-    }
-
+    //조회수 증가
     public void updateHits(Long id) {
         boardRepository.updateHits(id);
     }
 
-    public BoardDTO findById(Long id) {
-        return boardRepository.findById(id);
+    //상세
+    public BoardDTO boardDetail(Long id) {
+        return boardRepository.boardDetail(id);
+    }
+
+    //등록
+    public void insert(BoardDTO boardDTO) {
+        boardRepository.insert(boardDTO);
+    }
+
+    //수정
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+
+    public void delete(Long id) {
+        boardRepository.delete(id);
     }
 }

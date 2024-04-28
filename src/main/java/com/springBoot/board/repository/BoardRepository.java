@@ -12,19 +12,32 @@ import java.util.List;
 public class BoardRepository {
     private final SqlSessionTemplate sql;
 
-    public void save(BoardDTO boardDTO) {
-        sql.insert("BoardSql.save", boardDTO);
+    //목록
+    public List<BoardDTO> boardList() {
+        return sql.selectList("BoardSql.boardList");
     }
 
-    public List<BoardDTO> findAll() {
-        return sql.selectList("BoardSql.findAll");
-    }
-
+    //조회수 증가
     public void updateHits(Long id) {
         sql.update("BoardSql.updateHits", id);
     }
 
-    public BoardDTO findById(Long id) {
-        return sql.selectOne("BoardSql.findById");
+    //상세
+    public BoardDTO boardDetail(Long id) {
+        return sql.selectOne("BoardSql.boardDetail", id);
+    }
+
+    //등록
+    public void insert(BoardDTO boardDTO) {
+        sql.insert("BoardSql.insert", boardDTO);
+    }
+
+    //수정
+    public void update(BoardDTO boardDTO) {
+        sql.update("BoardSql.update", boardDTO);
+    }
+
+    public void delete(Long id) {
+        sql.delete("BoardSql.delete", id);
     }
 }
