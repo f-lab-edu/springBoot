@@ -1,4 +1,4 @@
-package com.springBoot.board;
+package com.springBoot.item;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

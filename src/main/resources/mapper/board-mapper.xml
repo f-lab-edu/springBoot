@@ -2,72 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BoardSql">
+<mapper namespace="itemSql">
 
     <!--  목록  -->
-    <select id="boardList" resultType="com.springBoot.board.dto.BoardDTO">
-        select id
-             , boardTitle
-             , boardWriter
-             , boardHits
-             , date_format(createdAt, "%Y-%m-%d") as createdAt
-        from board_table
-        order by id desc
+    <select id="itemList" resultType="com.springBoot.item.dto.ItemDTO">
+        select *
+        from item
+        order by item_id desc
     </select>
 
     <!--  조회수 증가  -->
     <update id="updateHits" parameterType="Long">
-        update board_table
-        set boardHits = boardHits+1
-        where id = #{id}
+        update item
+        set itemHits = itemHits+1
+        where item_id = #{itemId}
     </update>
 
     <!--  상세  -->
-    <select id="boardDetail" parameterType="Long" resultType="com.springBoot.board.dto.BoardDTO">
-        select id
-             , boardTitle
-             , boardWriter
-             , boardPass
-             , boardContents
-             , boardHits
+    <select id="itemDetail" parameterType="Long" resultType="com.springBoot.item.dto.ItemDTO">
+        select *
              , date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
-             , fileAttached
-        from board_table
-        where id = #{id}
+        from item
+        where item_id = #{itemId}
     </select>
 
     <!--  등록  -->
-    <insert id="insert" parameterType="com.springBoot.board.dto.BoardDTO">
-        insert into board_table(
-                                 boardTitle
-                               , boardWriter
-                               , boardPass
-                               , boardContents
-                                )
-        values(
-                #{boardTitle}
-              , #{boardWriter}
-              , #{boardPass}
-              , #{boardContents}
-              )
+    <insert id="itemInsert" parameterType="com.springBoot.item.dto.ItemDTO">
+        INSERT INTO item (item_detail, item_name, item_sell_status, price, quantity, open_yn)
+        VALUES (#{itemDetail}, #{itemName}, #{itemSellStatus}, #{price}, #{quantity}, #{openYn})
     </insert>
 
     <!--  수정  -->
-    <update id="update" parameterType="com.springBoot.board.dto.BoardDTO">
-        UPDATE board_table
-        SET  boardTitle = #{boardTitle}
-           , boardWriter = #{boardWriter}
-           , boardPass = #{boardPass}
-           , boardContents = #{boardContents}
-        WHERE 1=1
-          AND id = #{id}
+    <update id="itemUpdate" parameterType="com.springBoot.item.dto.ItemDTO">
+        UPDATE item
+        SET  item_detail = #{itemDetail}
+           , item_name = #{itemName}
+           , item_sell_status = #{itemSellStatus}
+           , price = #{price}
+           , quantity = #{quantity}
+           , open_yn = #{openYn}
+        WHERE item_id = #{itemId}
     </update>
 
     <!--  삭제  -->
-    <delete id="delete" parameterType="Long" >
-        DELETE FROM board_table
-        WHERE 1=1
-          AND id = #{id}
+    <delete id="itemDelete" parameterType="Long" >
+        DELETE FROM item
+        WHERE item_id = #{itemId}
     </delete>
 
 </mapper>
