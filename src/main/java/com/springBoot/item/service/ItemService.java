@@ -11,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor //생성자 주입
 public class ItemService {
     private final ItemRepository itemRepository;
+    private static long sequence = 0L;
 
     //목록
     public List<ItemDTO> itemList() {
