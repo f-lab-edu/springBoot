@@ -1,8 +1,13 @@
 package com.springBoot.item.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import java.util.List;
 
@@ -12,26 +17,26 @@ import java.util.List;
 public class ItemDTO {
 
     private Long itemId;
+
+    @NotBlank
     private String itemDetail;
+
+    @NotBlank
     private String itemName;
+
+    @NotBlank
     private String itemSellStatus;
-    private int price;
-    private int quantity;
+
+    @NotNull
+    @Range(min = 1000, max = 1000000)
+    private Integer price;
+
+    @NotNull
+    @Max(9999)
+    private Integer quantity;
+
     private int itemHits;
     private String createdAt;
     private Boolean openYn;         //판매여부
 
-//    private Long id;              //글번호
-//    private String boardWriter;   //작성자
-//    private String boardPass;     //비밀번호
-//    private String boardTitle;    //글제목
-//    private String boardContents; //글내용
-//    private int boardHits;        //조회수
-//    private String createdAt;     //작성시간
-//    private Boolean notice;       //공지여부
-//    private String useYn;         //사용여부
-//
-//    private List<String> regions; //등록 지역
-//    private BoardType boardType;  //상품 종류
-//    private String deliveryCode;  //배송 방식
 }

@@ -6,10 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -50,9 +49,15 @@ public class ItemController {
     }
 
     //등록
+    //@Validated : ItemDTO 검증을 항상 해줌
     @PostMapping("/insert")
-    public String itemInsert(ItemDTO itemDTO, RedirectAttributes redirectAttributes) {
-        log.info(" insert ={}", itemDTO);
+    public String itemInsert(@Validated @ModelAttribute("itemDTO") ItemDTO itemDTO, BindingResult bindingResult) {
+
+        //검증 실패
+        if (bindingResult.hasErrors()) {
+            return "item/insert"; //org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/item/insert.html]")
+        }
+
         itemService.itemInsert(itemDTO);
         return "redirect:/item/list";
     }
@@ -67,8 +72,13 @@ public class ItemController {
 
     //수정
     @PostMapping("/update/{itemId}")
-    public String itemUpdate(@PathVariable("itemId") Long itemId, ItemDTO itemDTO, RedirectAttributes redirectAttributes) {
-        log.info(" update log={}", itemDTO);
+    public String itemUpdate(@PathVariable("itemId") Long itemId, @Validated @ModelAttribute("itemDTO") ItemDTO itemDTO, BindingResult bindingResult) {
+
+        //검증 실패
+        if (bindingResult.hasErrors()) {
+//            return "item/update"; //org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/item/insert.html]")
+        }
+
         itemService.itemUpdate(itemDTO);
         return "redirect:/item/list/{itemId}";
     }
