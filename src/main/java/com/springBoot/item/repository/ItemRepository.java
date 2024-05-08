@@ -27,9 +27,19 @@ public class ItemRepository {
         return sql.selectOne("itemSql.itemDetail", id);
     }
 
+    //파일상세
+    public ItemDTO fileDetail(String fileId) {
+        return sql.selectOne("itemSql.fileDetail", fileId);
+    }
+
     //등록
     public void itemInsert(ItemDTO itemDTO) {
         sql.insert("itemSql.itemInsert", itemDTO);
+    }
+
+    //이미지 등록
+    public void fileInsert(ItemDTO itemDTO) {
+        sql.insert("itemSql.fileInsert", itemDTO);
     }
 
     //수정
