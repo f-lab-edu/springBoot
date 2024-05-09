@@ -6,6 +6,7 @@ import com.springBoot.item.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,10 @@ import java.util.*;
 @Slf4j // 로그
 @Controller
 @RequestMapping("/members")
-@RequiredArgsConstructor //생성자 주입
 public class MemberController {
 
-    private final MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     //회원가입 페이지 open
     @GetMapping("/add")

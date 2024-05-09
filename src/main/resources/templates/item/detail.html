@@ -54,10 +54,10 @@
             <label for="openYn" class="form-check-label" th:text="#{label.item.open}">판매 오픈</label>
         </div>
     </div>
-    <!-- 이미지 표시 -->
     <div>
-        <label for="image" th:text="#{label.item.image}">이미지</label>
-        <img id="image" th:src="'/study/uploadFile/'+${file.fileName}" alt="이미지가 없습니다." class="img-thumbnail">
+        <a th:href="|/item/list/download/${file.fileId}|" th:text="${file.oriFileName}" download></a>
+        <br/>
+        <img id="image" th:src="@{|/item/list/study/uploadFile/${file.fileName}|}" alt="이미지가 없습니다." class="img-thumbnail">
     </div>
     <hr class="my-4">
     <div class="row">
