@@ -26,10 +26,23 @@
         where item_id = #{itemId}
     </select>
 
+    <!--  파일상세  -->
+    <select id="fileDetail" parameterType="String" resultType="com.springBoot.item.dto.ItemDTO">
+        select *
+        from file
+        where file_id = #{fileId}
+    </select>
+
     <!--  등록  -->
     <insert id="itemInsert" parameterType="com.springBoot.item.dto.ItemDTO">
-        INSERT INTO item (item_detail, item_name, item_sell_status, price, quantity, open_yn)
-        VALUES (#{itemDetail}, #{itemName}, #{itemSellStatus}, #{price}, #{quantity}, #{openYn})
+        INSERT INTO item (item_detail, item_name, item_sell_status, price, quantity, open_yn, file_id)
+        VALUES (#{itemDetail}, #{itemName}, #{itemSellStatus}, #{price}, #{quantity}, #{openYn}, #{fileId})
+    </insert>
+
+    <!--  이미지 등록  -->
+    <insert id="fileInsert" parameterType="com.springBoot.item.dto.ItemDTO">
+        INSERT INTO file (file_id, file_name, file_path, ori_file_name)
+        VALUES (#{fileId}, #{fileName}, #{filePath}, #{oriFileName})
     </insert>
 
     <!--  수정  -->

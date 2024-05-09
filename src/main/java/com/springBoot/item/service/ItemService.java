@@ -2,15 +2,17 @@ package com.springBoot.item.service;
 
 import com.springBoot.item.dto.ItemDTO;
 import com.springBoot.item.repository.ItemRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor //생성자 주입
 public class ItemService {
-    private final ItemRepository itemRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     //목록
     public List<ItemDTO> itemList() {
@@ -27,8 +29,16 @@ public class ItemService {
         return itemRepository.itemDetail(id);
     }
 
+    //파일상세
+    public ItemDTO fileDetail(String fileId) {
+        return itemRepository.fileDetail(fileId);
+    }
+
     //등록
-    public void itemInsert(ItemDTO itemDTO) {
+    public void itemInsert(ItemDTO itemDTO) throws IOException {
+        if(itemDTO.getFileName()!=null){
+            itemRepository.fileInsert(itemDTO);
+        }
         itemRepository.itemInsert(itemDTO);
     }
 

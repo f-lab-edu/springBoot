@@ -3,6 +3,10 @@
 # server port
 server:
   port: 8080
+  servlet:
+    session:
+      tracking-modes: cookie # URL에 jsessionid 가 노출되지 않도록 함
+      timeout: 1800 #세션 타임아웃 (1800초)
 
 # database
 spring:
@@ -11,7 +15,7 @@ spring:
     url: jdbc:mysql://localhost:3306/item?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 1234
-  #메세지, 국제화
+  # 메세지, 국제화
   messages:
     basename: messages,errors
     encoding: UTF-8

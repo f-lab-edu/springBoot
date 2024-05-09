@@ -5,6 +5,7 @@ import com.springBoot.item.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -12,9 +13,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-@RequiredArgsConstructor //생성자 주입
 public class MemberRespository {
-    private final SqlSessionTemplate sql;
+
+    @Autowired
+    private SqlSessionTemplate sql;
 
     //회원가입
     public void saveMember(MemberDTO member) {

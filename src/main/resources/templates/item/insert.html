@@ -18,7 +18,7 @@
         <div class="py-5 text-center">
             <h2 th:text="#{page.addItem}">상품 등록</h2>
         </div>
-        <form th:action="@{/item/list/insert}" method="post" th:object="${item}">
+        <form th:action="@{/item/list/insert}" method="post" th:object="${item}" enctype="multipart/form-data">
             <div th:if="${#fields.hasGlobalErrors()}">
                 <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
             </div>
@@ -65,8 +65,7 @@
                 </div>
             </div>
             <div>
-                <img id="thumnail" src="" alt="미리보기 이미지" title="미리보기 이미지" width="200" height="200" class="hidden">
-                <input type="file" id="imageUpload" name="imageUpload" class="file-upload" accept="image/jpeg, image/png"/>
+                <input type="file" id="itemFile" name="itemFile" class="file-upload"/>
             </div>
             <hr class="my-4">
             <div class="row">

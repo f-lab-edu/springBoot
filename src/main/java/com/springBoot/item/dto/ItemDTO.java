@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.ScriptAssert;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -37,6 +38,15 @@ public class ItemDTO {
 
     private int itemHits;
     private String createdAt;
-    private Boolean openYn;         //판매여부
+    private Boolean openYn;          // 판매여부
+
+    //파일업로드
+//    private MultipartFile attachFile;
+//    private List<MultipartFile> imageFiles;
+
+    private String fileId;
+    private String fileName;
+    private String filePath;
+    private String oriFileName;
 
 }
